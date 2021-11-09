@@ -43,14 +43,15 @@ class ExpandableGroup extends StatefulWidget {
   /// Default value `Theme.of(context).appBarTheme.color`
   final Color? headerBackgroundColor;
 
-  ExpandableGroup({Key? key,
-    this.isExpanded = false,
-    required this.header,
-    required this.items,
-    this.expandedIcon,
-    this.collapsedIcon,
-    this.headerEdgeInsets,
-    this.headerBackgroundColor})
+  ExpandableGroup(
+      {Key? key,
+      this.isExpanded = false,
+      required this.header,
+      required this.items,
+      this.expandedIcon,
+      this.collapsedIcon,
+      this.headerEdgeInsets,
+      this.headerBackgroundColor})
       : super(key: key);
 
   @override
@@ -76,13 +77,13 @@ class _ExpandableGroupState extends State<ExpandableGroup> {
 
   Widget _wrapHeader() {
     List<Widget> children = [];
-    if (!widget.isExpanded) {
-      children.add(Divider());
-    }
+    // if (!widget.isExpanded) {
+    //   children.add(Divider());
+    // }
     children.add(ListTile(
       contentPadding: widget.headerEdgeInsets != null
           ? widget.headerEdgeInsets
-          : EdgeInsets.only(left: 0.0, right: 16.0),
+          : EdgeInsets.only(left: 0.0, right: 16.0, top: 0.0, bottom: 0.0),
       title: widget.header,
       trailing: _isExpanded
           ? widget.expandedIcon ?? Icon(Icons.keyboard_arrow_down)
@@ -90,7 +91,8 @@ class _ExpandableGroupState extends State<ExpandableGroup> {
       onTap: () => _updateExpandState(!_isExpanded),
     ));
     return Ink(
-      color: widget.headerBackgroundColor ?? Theme.of(context).appBarTheme.color,
+      color:
+          widget.headerBackgroundColor ?? Theme.of(context).appBarTheme.color,
       child: Column(
         children: children,
       ),
